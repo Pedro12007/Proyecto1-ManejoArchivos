@@ -48,7 +48,18 @@ def obtener_informacion():
                 return informacion
             return None
 
+    except (FileNotFoundError, json.JSONDecodeError, KeyError):
+        try:
+            with open(BACKUP, "r", encoding="utf-8") as backup:
+                informacion = json.load(backup)
+                if (informacion["nombre_usuario"] != None and informacion["tema_interfaz"] != None and 
+                    informacion["idioma"] != None and informacion["tamanio_fuente"] != None and 
+                    informacion["color_barra"] != None and informacion["color_letra"] != None and 
+                    informacion["foto_perfil"] != None):
 
-    except (FileNotFoundError, json.JSONDecodeError):
-        return None
+                    return informacion
+                return None
+            
+        except (FileNotFoundError, json.JSONDecodeError, KeyError):
+            return None
 
