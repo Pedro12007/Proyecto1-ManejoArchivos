@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QColorDialog
 from interfaz_ui import Ui_MainWindow
 
 class AppCafeteria(QMainWindow, Ui_MainWindow):
@@ -11,6 +11,8 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
         self.pushButton_guardarCambios.clicked.connect(self.guardar_configuracion)      
         self.pushButton_seleccionarFoto.clicked.connect(self.seleccionar_foto)
         self.pushButton_restablecerValores.clicked.connect(self.cargar_valores_por_defecto)
+        self.pushButton_colorMenu.clicked.connect(lambda: self.elegir_color(self.color_menu_swatch))
+        self.pushButton_colorLetra.clicked.connect(lambda: self.elegir_color(self.color_letra_swatch))
 
         self.cargar_configuracion()
 
@@ -47,6 +49,15 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
 
         
         print("Datos listos para guardar de forma segura:", datos_a_guardar)
+
+    def elegir_color(self, frame):
+        color = QColorDialog.getColor()
+        if color.isValid():
+            frame.setStyleSheet(f"background-color: {color.name()};")
+            if frame.objectName() == "color_menu_swatch":
+                self.color_menu_valor = color.name()
+            elif frame.objectName() == "color_letra_swatch":
+                self.color_letra_valor = color.name()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
