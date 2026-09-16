@@ -31,8 +31,10 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
         self.tema_interfaz.setCurrentIndex(0) 
         self.idioma.setCurrentIndex(0) 
         self.tamano_fuente.setValue(12) 
-        self.color_menu.setText("#FFFFFF") 
-        self.color_letra.setText("#000000")
+        self.color_menu_valor = "#FFFFFF" 
+        self.color_menu_swatch.setStyleSheet(f"background-color: #FFFFFF;")
+        self.color_letra_valor = "#000000"
+        self.color_letra_swatch.setStyleSheet(f"background-color: #000000;")
 
     def guardar_configuracion(self):
         """Lee los widgets y realiza la escritura"""
@@ -42,8 +44,8 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
             "tema": self.tema_interfaz.currentText(), 
             "idioma": self.idioma.currentText(), 
             "fuente": self.tamano_fuente.value(), 
-            "color_menu": self.color_menu.text(), 
-            "color_letra": self.color_letra.text() 
+            "color_menu": self.color_menu_valor, 
+            "color_letra": self.color_letra_valor 
         }
         
 
