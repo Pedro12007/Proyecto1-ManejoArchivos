@@ -73,18 +73,17 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
     def guardar_configuracion(self):
         """Lee los widgets y realiza la escritura"""
 
-        datos_a_guardar = {
-            "nombre": self.nombre_usuario.text(),
-            "tema": self.tema_interfaz.currentText(), 
-            "idioma": self.idioma.currentText(), 
-            "fuente": self.tamano_fuente.value(), 
-            "color_menu": self.color_menu_valor, 
-            "color_letra": self.color_letra_valor 
-        }
+        nombre = self.nombre_usuario.text()
+        tema = self.tema_interfaz.currentIndex() 
+        idioma = self.idioma.currentIndex()      
+        fuente = self.tamano_fuente.value() 
+        color_menu = self.color_menu_valor 
+        color_letra = self.color_letra_valor
+        dir_foto = self.ruta_foto_perfil
         
-
+        cf.guardar_informacion(nombre, tema, idioma, fuente, color_menu, color_letra, dir_foto)
+        self.aplicar_estilos()
         
-        print("Datos listos para guardar de forma segura:", datos_a_guardar)
 
     def aplicar_estilos(self):
         """Genera y aplica dinámicamente el stylesheet usando los valores seleccionados"""
