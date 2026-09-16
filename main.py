@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QColorDialog
+from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QColorDialog, QMessageBox
 from PyQt6.QtGui import QPixmap
 from interfaz_ui import Ui_MainWindow
 import configuracion as cf
@@ -49,6 +49,12 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
 
             self.aplicar_estilos()
         else:
+            QMessageBox.warning(
+                self,          
+                "Advertencia",        
+                "Configuración no guardada o corrupta. Se cargaran valores por defecto."        
+            )
+
             self.cargar_valores_por_defecto()
 
         
@@ -81,7 +87,15 @@ class AppCafeteria(QMainWindow, Ui_MainWindow):
         color_letra = self.color_letra_valor
         dir_foto = self.ruta_foto_perfil
         
-        cf.guardar_informacion(nombre, tema, idioma, fuente, color_menu, color_letra, dir_foto)
+        guardado = cf.guardar_informacion(nombre, tema, idioma, fuente, color_menu, color_letra, dir_foto)
+
+        if guardado == False:
+            QMessageBox.warning(
+                self,          
+                "Advertencia",        
+                "La información no se ha guardado."        
+            )
+
         self.aplicar_estilos()
         
 
