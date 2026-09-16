@@ -5,7 +5,7 @@ CONFIG = "config.json"
 TEMPORAL = "config_temporal.json"
 BACKUP = "config.bak"
 
-def guardar_informacion(nombre:str, tema:str, idioma:str, fuente:int, color_barra:str, color_letra:str, dir_foto:str):
+def guardar_informacion(nombre:str, tema:int, idioma:int, fuente:int, color_barra:str, color_letra:str, dir_foto:str):
     
     hay_informacion = False
     config_anterior = obtener_informacion()
